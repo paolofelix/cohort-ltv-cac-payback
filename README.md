@@ -10,6 +10,11 @@ A BigQuery and Python pipeline that follows two years of subscription customers 
 
 **Why synthetic data:** I analyze paid media accounts and their CRM and order data day to day, but client data is confidential. This dataset reproduces the problems I deal with in real CRM, order and finance exports: duplicate customer records, the same channel under 22 different source/medium labels, test and cancelled orders mixed in with real ones, amounts stored as text, and a finance ledger with three different month formats.
 
+> **Part 2 of a marketing analytics series**
+> 1. [Multi-channel attribution & ROAS](https://github.com/paolofelix/multichannel-attribution-roas): which channel gets credit?
+> 2. **Cohort LTV & CAC payback**: what is a customer worth, and how fast does spend pay back?
+> 3. [Marketing Mix Model](https://github.com/paolofelix/marketing-mix-model): what would have happened *without* each channel?
+
 ---
 
 ## The business question
