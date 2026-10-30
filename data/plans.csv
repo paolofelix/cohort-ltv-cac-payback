@@ -1,0 +1,4 @@
+plan_id,plan_name,list_price,cogs_per_box,shipping_per_box
+STARTER,Starter Box,29.00,12.00,6.00
+STANDARD,Standard Box,45.00,17.00,7.00
+PREMIUM,Premium Box,65.00,24.00,8.00
