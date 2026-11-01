@@ -14,6 +14,7 @@ A BigQuery and Python pipeline that follows two years of subscription customers 
 > 1. [Multi-channel attribution & ROAS](https://github.com/paolofelix/multichannel-attribution-roas): which channel gets credit?
 > 2. **Cohort LTV & CAC payback**: what is a customer worth, and how fast does spend pay back?
 > 3. [Marketing Mix Model](https://github.com/paolofelix/marketing-mix-model): what would have happened *without* each channel?
+> 4. [Lead Scoring Model](https://github.com/paolofelix/lead-scoring-model): which leads will actually close, and which should sales call first?
 
 ---
 
