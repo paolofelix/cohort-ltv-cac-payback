@@ -1,12 +1,16 @@
 # Cohort LTV & CAC Payback by Acquisition Channel
 
+[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://paolofelix-cohort-ltv-cac-payback.streamlit.app/)
+
+**▶ [Try the interactive dashboard](https://paolofelix-cohort-ltv-cac-payback.streamlit.app/)**: switch between media-only and fully loaded CAC, change the LTV horizon, and see which channels' customers pay back and when.
+
 A BigQuery and Python pipeline that follows two years of subscription customers from their first order, by the channel that acquired them, and compares what each channel costs to acquire a customer (CAC) with what that customer earns back (LTV, on contribution margin).
 
 **Key result:** TikTok has the lowest CAC ($57 fully loaded) but its customers return only $29 of contribution in their first year, about half of what they cost. Google costs the most per customer ($102) and is the only paid channel that clearly pays back, in month 7. Over the last 18 months the business moved budget into TikTok: blended CAC fell 15%, but the expected value of a new paid customer fell 32%.
 
 ![CAC vs LTV](python/charts/04_cac_vs_ltv.png)
 
-📄 **[Read the findings write-up →](FINDINGS.md)** · **Tools:** BigQuery (SQL), Python (pandas, matplotlib), Google Sheets
+📄 **[Read the findings write-up →](FINDINGS.md)** · 📊 **[Open the live dashboard →](https://paolofelix-cohort-ltv-cac-payback.streamlit.app/)** · **Tools:** BigQuery (SQL), Python (pandas, matplotlib, Plotly), Streamlit, Google Sheets
 
 **Why synthetic data:** I analyze paid media accounts and their CRM and order data day to day, but client data is confidential. This dataset reproduces the problems I deal with in real CRM, order and finance exports: duplicate customer records, the same channel under 22 different source/medium labels, test and cancelled orders mixed in with real ones, amounts stored as text, and a finance ledger with three different month formats.
 
@@ -111,6 +115,29 @@ To run it: `pip install -r python/requirements.txt`, then `python python/cohort_
     %cd cohort-ltv-cac-payback
     !python python/cohort_ltv_charts.py
 
+## Interactive dashboard
+
+**Live app:** https://paolofelix-cohort-ltv-cac-payback.streamlit.app/
+
+`dashboard/app.py` is a Streamlit app built on the same cleaning, contribution-margin and cohort logic as the SQL and Python pipeline. It recalculates live, so you can change the assumptions and see how the channel ranking holds up:
+
+| Tab | What you can do |
+|---|---|
+| **CAC vs LTV** | Compare media CAC, fully loaded CAC and LTV for each paid channel, with LTV:CAC and a summary table for all five channels |
+| **Payback curves** | Follow cumulative contribution per customer against CAC and see the month each channel pays back |
+| **Retention** | Compare retention curves by channel and explore a cohort heatmap of retention or cumulative LTV for any channel |
+| **Max CAC calculator** | Pick the payback period finance will accept and see the most each channel can pay per customer |
+| **Budget shift** | See how the move into TikTok changed the paid signup mix, blended CAC and expected LTV per customer |
+| **Black Friday cohorts** | Compare signups, retention and 6-month LTV for the 50%-off November cohorts against other months |
+| **Data quality** | Check raw vs clean row counts, removed test, duplicate and cancelled orders, and how 22 UTM labels map to 5 channels |
+
+The sidebar controls let you choose the CAC basis (fully loaded or media only), the LTV horizon (3, 6 or 12 months) and which channels to show. The defaults reproduce the numbers in this README.
+
+To run it locally (from the repo root):
+
+    pip install -r dashboard/requirements.txt
+    streamlit run dashboard/app.py
+
 ## How to reproduce
 
 1. Copy the 4 CSVs in `/data` into a Google Sheet, one tab each, using the same tab names.
@@ -127,9 +154,11 @@ To run it: `pip install -r python/requirements.txt`, then `python python/cohort_
 ├── python/            # pandas version, requirements.txt and charts/
 ├── data/              # synthetic source data (CSV)
 └── screenshots/       # BigQuery query results
+├── dashboard/         # Streamlit app (app.py) and its requirements.txt
+├── .streamlit/        # dashboard theme (config.toml)
 ```
 
 ## About me
 
-Paolo Felix: Data analyst with a background in finance operations and paid media analytics across Google, Meta and Microsoft Ads.
+Paolo Felix: Data analyst with a background in financial operations and paid media analytics across Google, Meta and Microsoft Ads.
 https://www.linkedin.com/in/paolo-stefano-b-felix/ · paolobfelix@gmail.com
